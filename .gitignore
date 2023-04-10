@@ -1,6 +1,9 @@
 
-# log
+# Log
 logs/
+
+# Env
+.env
 
 # Binaries for programs and plugins
 *.exe
