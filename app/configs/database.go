@@ -1,4 +1,4 @@
-package config
+package configs
 
 import (
 	"database/sql"
@@ -8,9 +8,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-var debe *sql.DB
-
-type ConnectionDB struct {
+type ConnectionDB struct {	
 	DBHost     string
     DBPort     int
     DBName     string
@@ -19,7 +17,7 @@ type ConnectionDB struct {
     DBmode string
 }
 
-func InitDB(con *ConnectionDB) {
+func InitDB(con *ConnectionDB) *sql.DB {
 	db, err := sql.Open("postgres", fmt.Sprintf(`host=%s port=%d user=%s password=%s dbname=%s sslmode=%s`, con.DBHost, con.DBPort, con.DBUser, con.DBPassword, con.DBName, con.DBmode))
 	if err != nil {
 		panic(fmt.Sprintf("DB Error Open => %s", err))
@@ -34,8 +32,6 @@ func InitDB(con *ConnectionDB) {
 	if err != nil {
 		panic(fmt.Sprintf("Connection DB Error => %s", err))
 	}
-}
 
-func DBConn() *sql.DB {
-	return debe
+	return db
 }
